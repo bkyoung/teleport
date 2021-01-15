@@ -40,20 +40,24 @@ Your browser does not support the video tag.
 
 ## Getting Started
 
-In this getting started guide we will use Teleport Database Access to connect
-to a PostgreSQL flavored AWS Aurora database instance.
+In this guide we will use Teleport Database Access to connect to a PostgreSQL
+flavored AWS Aurora database. Here's an overview of what we will do:
+
+1. Configure AWS Aurora database with IAM authentication.
+2. Download and install Teleport and connect it to the Aurora database.
+3. Connect to the Aurora database via Teleport.
 
 ### Step 1/3. Setup Aurora
 
-The first step is to configure an Aurora database to support IAM authentication
-which Teleport will use when connecting to it.
+In order to allow Teleport connections to an Aurora instance, it needs to support
+IAM authentication.
 
-If you don't have a database provisioned yet, create an instance of a PostgreSQL
-compatible Aurora instance in the [RDS control panel](https://us-west-1.console.aws.amazon.com/rds/home).
-Make sure to check "Password and IAM database authentication" in the Database
-Authentication dialog to enable IAM auth.
+If you don't have a database provisioned yet, create an instance of an Aurora
+PostgreSQL instance in the [RDS control panel](https://console.aws.amazon.com/rds/home).
+Make sure to enable "Password and IAM database authentication" in the Database
+Authentication dialog.
 
-For existing Aurora databases, the status of IAM authentication is displayed on
+For existing Aurora instances, the status of IAM authentication is displayed on
 the Configuration tab and can be enabled by modifying the database instance.
 
 Next, create the following IAM policy attached to a user whose credentials a
@@ -88,12 +92,11 @@ See a more detailed description of these steps in the [reference](#aws-rdsaurora
 
 ### Step 2/3. Setup Teleport
 
-Head over to Teleport [downloads page](https://goteleport.com/teleport/download)
-and download the latest version of Teleport for your platform. Database Access
-is available starting from `6.0.0-alpha.1` release.
+Download the latest version of Teleport for your platform from [downloads page](https://goteleport.com/teleport/download).
+Database Access is available starting from `6.0.0-alpha.1` release.
 
-Start Teleport using the following command and point it to your Aurora database.
-Make sure to update the database endpoint and region appropriately.
+Start Teleport using the following command and point it to your Aurora database
+instance. Make sure to update the database endpoint and region appropriately.
 
 ```shell
 sudo teleport start \
@@ -106,10 +109,11 @@ sudo teleport start \
 
 !!! note "AWS credentials"
     The node where the Teleport process is started should have AWS credentials
-    configured with the policy created above.
+    configured with the policy from [step 1](#step-13-setup-aurora).
 
-Create a Teleport user that is allowed to connect to a particular database
-within the Aurora instance.
+Create a Teleport user that is allowed to connect to a particular database 
+(e.g. `postgres`) within the Aurora instance as a particular database account
+(e.g. `alice`).
 
 ```shell
 sudo tctl users add alice root \
@@ -119,15 +123,15 @@ sudo tctl users add alice root \
 
 ### Step 3/3. Connect to Database
 
-Now that Aurora is configured with IAM authentication, Teleport is started and
+Now that Aurora is configured with IAM authentication, Teleport is running and
 the local user is created, we're ready to connect to the database.
 
 Log into Teleport with the user we've just created.
 
 !!! note "Teleport certificate"
-    For the ease of this guide, we're using an `--insecure` flag to accept
-    Teleport's self-signed certificate. For production usage make sure to 
-    configure proxy with a proper certificate/key pair. See Teleport's general
+    For simplicity, we're using an `--insecure` flag to accept Teleport's
+    self-signed certificate. For production usage make sure to configure proxy
+    with a proper certificate/key pair. See Teleport's general
     [quickstart guide](../quickstart.md#step-1c-configure-domain-name-and-obtain-tls-certificates-using-lets-encrypt).
 
 ```shell
