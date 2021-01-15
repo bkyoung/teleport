@@ -111,7 +111,7 @@ sudo teleport start \
     The node where the Teleport process is started should have AWS credentials
     configured with the policy from [step 1](#step-13-setup-aurora).
 
-Create a Teleport user that is allowed to connect to a particular database 
+Create a Teleport user that is allowed to connect to a particular database
 (e.g. `postgres`) within the Aurora instance as a particular database account
 (e.g. `alice`).
 
