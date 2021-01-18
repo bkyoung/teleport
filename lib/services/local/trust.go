@@ -80,7 +80,11 @@ func (s *CA) UpsertCertAuthority(ca services.CertAuthority) error {
 // if the existing value matches existing parameter, returns nil if succeeds,
 // trace.CompareFailed otherwise.
 func (s *CA) CompareAndSwapCertAuthority(new, existing services.CertAuthority) error {
+<<<<<<< HEAD
 	if err := services.ValidateCertAuthority(new); err != nil {
+=======
+	if err := new.CheckAndSetDefaults(); err != nil {
+>>>>>>> origin/joerger/api-dependency-reduction-utils-constants
 		return trace.Wrap(err)
 	}
 	newValue, err := services.GetCertAuthorityMarshaler().MarshalCertAuthority(new)
@@ -213,9 +217,12 @@ func (s *CA) GetCertAuthority(id services.CertAuthID, loadSigningKeys bool, opts
 	if err != nil {
 		return nil, trace.Wrap(err)
 	}
+<<<<<<< HEAD
 	if err := services.ValidateCertAuthority(ca); err != nil {
 		return nil, trace.Wrap(err)
 	}
+=======
+>>>>>>> origin/joerger/api-dependency-reduction-utils-constants
 	setSigningKeys(ca, loadSigningKeys)
 	return ca, nil
 }
@@ -251,9 +258,12 @@ func (s *CA) GetCertAuthorities(caType services.CertAuthType, loadSigningKeys bo
 		if err != nil {
 			return nil, trace.Wrap(err)
 		}
+<<<<<<< HEAD
 		if err := services.ValidateCertAuthority(ca); err != nil {
 			return nil, trace.Wrap(err)
 		}
+=======
+>>>>>>> origin/joerger/api-dependency-reduction-utils-constants
 		setSigningKeys(ca, loadSigningKeys)
 		cas[i] = ca
 	}

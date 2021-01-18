@@ -45,7 +45,10 @@ import (
 	"golang.org/x/crypto/ssh/terminal"
 
 	"github.com/gravitational/teleport"
+<<<<<<< HEAD
 	"github.com/gravitational/teleport/api/types"
+=======
+>>>>>>> origin/joerger/api-dependency-reduction-utils-constants
 	"github.com/gravitational/teleport/api/types/wrappers"
 	"github.com/gravitational/teleport/lib/auth"
 	"github.com/gravitational/teleport/lib/defaults"

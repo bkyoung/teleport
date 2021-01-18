@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
 Copyright 2021 Gravitational, Inc.
 
@@ -14,6 +15,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+=======
+>>>>>>> origin/joerger/api-dependency-reduction-utils-constants
 package types
 
 import (

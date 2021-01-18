@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
 Copyright 2021 Gravitational, Inc.
 
@@ -14,6 +15,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+=======
+>>>>>>> origin/joerger/api-dependency-reduction-utils-constants
 package services
 
 import (
@@ -23,8 +26,13 @@ import (
 	"github.com/gravitational/trace"
 )
 
+<<<<<<< HEAD
 // ValidateTrustedCluster checks and sets Trusted Cluster defaults
 func ValidateTrustedCluster(tc TrustedCluster) error {
+=======
+// CheckAndSetTrustedClusterDefaults checks and sets Trusted Cluster defaults
+func CheckAndSetTrustedClusterDefaults(tc TrustedCluster) error {
+>>>>>>> origin/joerger/api-dependency-reduction-utils-constants
 	if err := tc.CheckAndSetDefaults(); err != nil {
 		return trace.Wrap(err)
 	}

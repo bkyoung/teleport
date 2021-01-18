@@ -27,7 +27,10 @@ import (
 	"golang.org/x/crypto/ssh"
 
 	"github.com/gravitational/teleport"
+<<<<<<< HEAD
 	"github.com/gravitational/teleport/api/types"
+=======
+>>>>>>> origin/joerger/api-dependency-reduction-utils-constants
 	"github.com/gravitational/teleport/api/types/wrappers"
 	"github.com/gravitational/teleport/lib/defaults"
 	"github.com/gravitational/teleport/lib/fixtures"
@@ -1841,8 +1844,11 @@ func TestApplyTraits(t *testing.T) {
 		require.Equal(t, outRole.GetClusterLabels(Deny), tt.deny.outLabels, comment)
 		require.Equal(t, outRole.GetKubeGroups(Deny), tt.deny.outKubeGroups, comment)
 		require.Equal(t, outRole.GetKubeUsers(Deny), tt.deny.outKubeUsers, comment)
+<<<<<<< HEAD
 		require.Equal(t, outRole.GetDatabaseNames(Deny), tt.deny.outDBNames, comment)
 		require.Equal(t, outRole.GetDatabaseUsers(Deny), tt.deny.outDBUsers, comment)
+=======
+>>>>>>> origin/joerger/api-dependency-reduction-utils-constants
 	}
 }
 

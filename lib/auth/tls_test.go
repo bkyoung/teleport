@@ -2017,7 +2017,11 @@ func (s *TLSSuite) TestGenerateAppToken(c *check.C) {
 	}, true)
 	c.Assert(err, check.IsNil)
 
+<<<<<<< HEAD
 	key, err := services.GetJWTSigner(ca, s.clock)
+=======
+	key, err := services.GetJWTSigner(ca, jwt.Config{Clock: s.clock})
+>>>>>>> origin/joerger/api-dependency-reduction-utils-constants
 	c.Assert(err, check.IsNil)
 
 	var tests = []struct {

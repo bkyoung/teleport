@@ -28,7 +28,10 @@ import (
 	"github.com/gravitational/teleport/lib/jwt"
 	"github.com/gravitational/teleport/lib/tlsca"
 	"github.com/gravitational/teleport/lib/utils"
+<<<<<<< HEAD
 	"github.com/jonboulle/clockwork"
+=======
+>>>>>>> origin/joerger/api-dependency-reduction-utils-constants
 
 	"github.com/gravitational/trace"
 	"github.com/tstranex/u2f"
@@ -141,7 +144,11 @@ func checkJWTKeys(ca CertAuthority) error {
 }
 
 // GetJWTSigner returns the active JWT key used to sign tokens.
+<<<<<<< HEAD
 func GetJWTSigner(ca CertAuthority, clock clockwork.Clock) (*jwt.Key, error) {
+=======
+func GetJWTSigner(ca CertAuthority, config jwt.Config) (*jwt.Key, error) {
+>>>>>>> origin/joerger/api-dependency-reduction-utils-constants
 	if len(ca.GetJWTKeyPairs()) == 0 {
 		return nil, trace.BadParameter("no JWT keypairs found")
 	}
@@ -149,12 +156,19 @@ func GetJWTSigner(ca CertAuthority, clock clockwork.Clock) (*jwt.Key, error) {
 	if err != nil {
 		return nil, trace.Wrap(err)
 	}
+<<<<<<< HEAD
 	key, err := jwt.New(&jwt.Config{
 		Clock:       clock,
 		Algorithm:   defaults.ApplicationTokenAlgorithm,
 		ClusterName: ca.GetClusterName(),
 		PrivateKey:  privateKey,
 	})
+=======
+	config.Algorithm = defaults.ApplicationTokenAlgorithm
+	config.ClusterName = ca.GetClusterName()
+	config.PrivateKey = privateKey
+	key, err := jwt.New(&config)
+>>>>>>> origin/joerger/api-dependency-reduction-utils-constants
 	if err != nil {
 		return nil, trace.Wrap(err)
 	}

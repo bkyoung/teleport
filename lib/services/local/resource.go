@@ -210,7 +210,11 @@ func itemToUser(item backend.Item) (services.User, error) {
 // itemFromCertAuthority attempts to encode the supplied certificate authority
 // as an instance of `backend.Item` suitable for storage.
 func itemFromCertAuthority(ca services.CertAuthority) (*backend.Item, error) {
+<<<<<<< HEAD
 	if err := services.ValidateCertAuthority(ca); err != nil {
+=======
+	if err := ca.CheckAndSetDefaults(); err != nil {
+>>>>>>> origin/joerger/api-dependency-reduction-utils-constants
 		return nil, trace.Wrap(err)
 	}
 	value, err := services.GetCertAuthorityMarshaler().MarshalCertAuthority(ca)
@@ -237,9 +241,12 @@ func itemToCertAuthority(item backend.Item) (services.CertAuthority, error) {
 	if err != nil {
 		return nil, trace.Wrap(err)
 	}
+<<<<<<< HEAD
 	if err := services.ValidateCertAuthority(ca); err != nil {
 		return nil, trace.Wrap(err)
 	}
+=======
+>>>>>>> origin/joerger/api-dependency-reduction-utils-constants
 	return ca, nil
 }
 

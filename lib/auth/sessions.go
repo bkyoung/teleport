@@ -107,7 +107,11 @@ func (s *Server) generateAppToken(username string, roles []string, uri string, e
 	}
 
 	// Extract the JWT signing key and sign the claims.
+<<<<<<< HEAD
 	privateKey, err := services.GetJWTSigner(ca, s.clock)
+=======
+	privateKey, err := services.GetJWTSigner(ca, jwt.Config{Clock: s.clock})
+>>>>>>> origin/joerger/api-dependency-reduction-utils-constants
 	if err != nil {
 		return "", trace.Wrap(err)
 	}

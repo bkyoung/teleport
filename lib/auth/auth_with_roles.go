@@ -23,7 +23,10 @@ import (
 
 	"github.com/gravitational/teleport"
 	"github.com/gravitational/teleport/api/client/proto"
+<<<<<<< HEAD
 	"github.com/gravitational/teleport/api/types"
+=======
+>>>>>>> origin/joerger/api-dependency-reduction-utils-constants
 	"github.com/gravitational/teleport/api/types/wrappers"
 	"github.com/gravitational/teleport/lib/defaults"
 	"github.com/gravitational/teleport/lib/events"

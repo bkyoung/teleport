@@ -20,11 +20,15 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/gravitational/teleport"
+	"github.com/gravitational/teleport/api/constants"
 	"github.com/gravitational/teleport/api/defaults"
-	"github.com/gravitational/teleport/lib/utils"
+	"github.com/gravitational/teleport/api/utils"
 
 	"github.com/gravitational/trace"
+<<<<<<< HEAD
+=======
+	log "github.com/sirupsen/logrus"
+>>>>>>> origin/joerger/api-dependency-reduction-utils-constants
 )
 
 // SAMLConnector specifies configuration for SAML 2.0 identity providers
@@ -383,8 +387,16 @@ func (o *SAMLConnectorV2) CheckAndSetDefaults() error {
 	if err := o.Metadata.CheckAndSetDefaults(); err != nil {
 		return trace.Wrap(err)
 	}
+<<<<<<< HEAD
 	if o.Metadata.Name == teleport.Local {
 		return trace.BadParameter("ID: invalid connector name %v is a reserved name", teleport.Local)
+=======
+	if o.Metadata.Name == "" {
+		return trace.BadParameter("ID: missing connector name, name your connector to refer to internally e.g. okta1")
+	}
+	if o.Metadata.Name == constants.Local {
+		return trace.BadParameter("ID: invalid connector name %v is a reserved name", constants.Local)
+>>>>>>> origin/joerger/api-dependency-reduction-utils-constants
 	}
 	if o.Spec.AssertionConsumerService == "" {
 		return trace.BadParameter("missing acs - assertion consumer service parameter, set service URL that will receive POST requests from SAML")
@@ -404,6 +416,29 @@ func (o *SAMLConnectorV2) CheckAndSetDefaults() error {
 			return trace.BadParameter("no SSO set either explicitly or via entity_descriptor spec")
 		}
 	}
+<<<<<<< HEAD
+=======
+	if o.Spec.Issuer == "" {
+		return trace.BadParameter("no issuer or entityID set, either set issuer as a parameter or via entity_descriptor spec")
+	}
+	if o.Spec.SSO == "" {
+		return trace.BadParameter("no SSO set either explicitly or via entity_descriptor spec")
+	}
+
+	if o.Spec.SigningKeyPair == nil {
+		keyPEM, certPEM, err := utils.GenerateSelfSignedSigningCert(pkix.Name{
+			Organization: []string{"Teleport OSS"},
+			CommonName:   "constants.localhost.localdomain",
+		}, nil, 10*365*24*time.Hour)
+		if err != nil {
+			return trace.Wrap(err)
+		}
+		o.Spec.SigningKeyPair = &SigningKeyPair{
+			PrivateKey: string(keyPEM),
+			Cert:       string(certPEM),
+		}
+	}
+>>>>>>> origin/joerger/api-dependency-reduction-utils-constants
 	// make sure claim mappings have either roles or a role template
 	for _, v := range o.Spec.AttributesToRoles {
 		if len(v.Roles) == 0 {
